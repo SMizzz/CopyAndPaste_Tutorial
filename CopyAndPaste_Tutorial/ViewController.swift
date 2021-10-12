@@ -13,30 +13,17 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureCopyLabel()
-    // Do any additional setup after loading the view.
   }
+
   
-  private func configureCopyLabel() {
-    copyLabel.text = "안녕하세요, 이것은 복사될 문구입니다."
-    let tapGesture = UITapGestureRecognizer(
-      target: self,
-      action: #selector(handleCopyLabel))
-//    copyLabel.isUserInteractionEnabled = true
-    copyLabel.addGestureRecognizer(tapGesture)
-  }
-  
-  @objc func handleCopyLabel() {
-    //    guard let label = copyLabel else {
-    //      return
-    //    }
-    print("tapped")
-    UIPasteboard.general.string = copyLabel.text
-  }
   
   @IBAction func nextBtnTap(_ sender: Any) {
+    UIPasteboard.general.string = copyLabel.text
+    
     let mainSB = UIStoryboard(name: "Main", bundle: nil)
-    let pastedVC = mainSB.instantiateViewController(withIdentifier: "PastedVC")
+    
+    guard let pastedVC = mainSB.instantiateViewController(withIdentifier: "PastedVC") as? PastedViewController else { return }
+    
     navigationController?.pushViewController(pastedVC, animated: true)
   }
   

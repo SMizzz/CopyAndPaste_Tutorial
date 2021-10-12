@@ -8,12 +8,16 @@
 import UIKit
 
 class PastedViewController: UIViewController {
-
+  
   @IBOutlet weak var copyLabel: UILabel!
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-
+    super.viewDidLoad()
+    
+    if let storedString = UIPasteboard.general.string {
+      print(storedString)
+      copyLabel.text = storedString
     }
+  }
   
 }
